@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="style.css">
   <script defer src="anime.js"></script>
 </head>
+
 <body>
   <button>button</button>
 
@@ -15,8 +17,21 @@
     <div id="box"></div>
   </section>
 
-  <div id="box"></div>
+  <script>
+    const btn = document.querySelector('button');
+    const box = document.querySelector('#box');
+
+    btn.addEventListener('click', () => {
+      new Anime(box, {
+        prop: 'margin-left',
+        value: 300,
+        duration: 500
+      })
+    })
+  </script>
+
 </body>
+
 </html>
 
 <!--
