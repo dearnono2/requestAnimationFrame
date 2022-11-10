@@ -29,5 +29,7 @@ function move(time) {
 
   if(progress < 1) {
     num++;
+    console.log(`반복횟수: ${num} / 진행률: ${progress} / 진행된 시간: ${timelast}`)
+    requestAnimationFrame(move);
   }
 }
