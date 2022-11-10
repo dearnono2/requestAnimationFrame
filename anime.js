@@ -27,9 +27,14 @@ function move(time) {
   // 0~1사이의 실수값을 반환 0:시작 1:종료
   let progress = timelast/speed;
 
+  // 시작할 때와 끝나는 시점의 진행률을 보정
+  (progress < 0) && (progress = 0);
+  (progress > 1) && (progress = 1);
+
   if(progress < 1) {
     num++;
-    console.log(`반복횟수: ${num} / 진행률: ${progress} / 진행된 시간: ${timelast}`)
+    console.log(`진행률: ${progress}`)
     requestAnimationFrame(move);
   }
+  console.log(progress);
 }
