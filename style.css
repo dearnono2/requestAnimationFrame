@@ -3,7 +3,8 @@
 	padding: 0;
 }
 
-body {
-	height: 5000px;
-	background: linear-gradient(to bottom, aqua, lightgreen, yellow, hotpink);
+#box {
+	width: 100px;
+	height: 100px;
+	background: aqua;
 }

@@ -2,17 +2,20 @@ const btn = document.querySelector('button');
 const box = document.querySelector('#box');
 
 btn.addEventListener('click', () => {
-  anime(window, {
-    prop: 'scroll',
-    value: 4000,
-    duration: 1000
+  anime(box, {
+    prop: 'margin-left',
+    value: 300,
+    duration: 500,
+    callback: () => {
+      anime(box, {
+        prop: 'margin-top',
+        value: 200,
+        duration: 500
+      })
+    }
   })
 });
 
-/*
-  window.scrollY: 현재 스크롤된 거리값
-  window.scroll(x, y) : x,y축 스크롤 강제 이동
-*/
 
 function anime(selector, option) {
   const startTime = performance.now();
@@ -42,11 +45,10 @@ function anime(selector, option) {
 
     (progress < 0) && (progress = 0);
     (progress > 1) && (progress = 1);
-    if (progress < 1) {
-      requestAnimationFrame(run);
-    } else {
-      option.callback && option.callback();
-    }
+    (progress < 1)
+      ? requestAnimationFrame(run)
+      : option.callback && setTimeout(() => option.callback(), 0);
+
     let result = currentValue + ((option.value - currentValue) * progress);
 
     if (isString === 'string') selector.style[option.prop] = `${result}%`;
