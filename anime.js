@@ -3,7 +3,7 @@ const box = document.querySelector('#box');
 
 btn.addEventListener('click', () => {
   anime(box, {
-    prop: 'margin-left',
+    prop: 'top',
     value: '50%',
     duration: 500
   })
@@ -15,9 +15,24 @@ function anime(selector, option) {
 
   const isString = typeof option.value;
   if (isString === 'string') {
-    //기존의 currentValue값을 다시 전체 브라우저폭 대비 퍼센트값으로 변환해서 재할당
-    const winW = window.innerWidth;
-    currentValue = (currentValue / winW) * 100;
+    const x = ['margin-left', 'margin-right', 'left', 'right', 'width'];
+    const y = ['margin-top', 'margin-bottom', 'top', 'bottom', 'height'];
+
+    //퍼센트로 동작할지도 모를 가로폭에 관련된 속성명을 반복을 돌며 조건문 설정
+    //해당 조건일때 해당 요소의 직계부모 넓이값을 기준으로 변환한 퍼센트 값을 currentValue에 담음
+    for (let cond of x) {
+      if (option.prop === cond) {
+        const parentW = parseInt(getComputedStyle(selector.parentElement).width);
+        currentValue = (currentValue / parentW) * 100;
+      }
+    }
+
+    for (let cond of y) {
+      if (option.prop === cond) {
+        const parentH = parseInt(getComputedStyle(selector.parentElement).height);
+        currentValue = (currentValue / parentH) * 100;
+      }
+    }
     option.value = parseFloat(option.value);
   }
   (option.value !== currentValue) && requestAnimationFrame(run);
