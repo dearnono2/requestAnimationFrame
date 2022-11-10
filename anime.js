@@ -32,9 +32,10 @@ function move(time) {
   (progress > 1) && (progress = 1);
 
   if(progress < 1) {
-    num++;
-    console.log(`진행률: ${progress}`)
+    console.log(`반복시 움직인 누적거리값: ${300 * progress}px`)
     requestAnimationFrame(move);
+    box.style.marginLeft = `${300 * progress}px`; 
   }
-  console.log(progress);
+  console.log(progress * 300);
 }
+
