@@ -23,9 +23,11 @@ function move(time) {
   // timelast - 버튼을 클릭한 시점부터의 누적시간
   let timelast = time - startTime;
 
-  if(num <= 200) {
+  // 진행률 (반복된 누적시간 / 전체시간)
+  // 0~1사이의 실수값을 반환 0:시작 1:종료
+  let progress = timelast/speed;
+
+  if(progress < 1) {
     num++;
-    requestAnimationFrame(move);
   }
-  box.style.marginLeft = `${num}px`;
 }
